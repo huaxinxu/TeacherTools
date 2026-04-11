@@ -1,0 +1,67 @@
+import { NavLink } from "react-router-dom"
+import { Home, CalendarDays, Camera, Grid3X3, Mic, User, GraduationCap } from "lucide-react"
+import { cn } from "@/lib/utils"
+
+const navItems = [
+  { to: "/", icon: Home, label: "首页", end: true },
+  { to: "/calendar", icon: CalendarDays, label: "日历" },
+  { to: "/score", icon: Camera, label: "计分" },
+  { to: "/seating", icon: Grid3X3, label: "座位" },
+  { to: "/decibel", icon: Mic, label: "分贝" },
+  { to: "/profile", icon: User, label: "我的" },
+]
+
+export function AppNav() {
+  return (
+    <>
+      {/* ── PC Sidebar ── */}
+      <aside className="hidden md:flex fixed inset-y-0 left-0 w-60 gradient-sidebar flex-col z-40">
+        <div className="flex items-center gap-3 px-5 h-16 border-b border-sidebar-border">
+          <div className="w-8 h-8 rounded-lg gradient-hero flex items-center justify-center">
+            <GraduationCap className="w-5 h-5 text-primary-foreground" />
+          </div>
+          <span className="font-bold text-sidebar-foreground">教师助手</span>
+        </div>
+        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
+          {navItems.map(item => (
+            <NavLink key={item.to} to={item.to} end={item.end}
+              className={({ isActive }) => cn(
+                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
+                isActive
+                  ? "bg-sidebar-active/20 text-primary-foreground"
+                  : "text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-foreground/5"
+              )}>
+              <item.icon className="w-5 h-5 flex-shrink-0" />
+              <span>{item.label}</span>
+            </NavLink>
+          ))}
+        </nav>
+        <div className="px-5 py-4 border-t border-sidebar-border">
+          <p className="text-xs text-sidebar-foreground/40">教师智能助手 v1.0</p>
+        </div>
+      </aside>
+
+      {/* ── Mobile Bottom Nav ── */}
+      <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-card/95 backdrop-blur-md border-t shadow-medium safe-bottom">
+        <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
+          {navItems.slice(0, 5).map(item => (
+            <NavLink key={item.to} to={item.to} end={item.end}
+              className={({ isActive }) => cn(
+                "flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-colors min-w-[48px]",
+                isActive ? "text-primary" : "text-muted-foreground"
+              )}>
+              {({ isActive }) => (
+                <>
+                  <div className={cn("p-1 rounded-lg", isActive && "bg-primary/10")}>
+                    <item.icon className="w-5 h-5" strokeWidth={isActive ? 2.5 : 2} />
+                  </div>
+                  <span className={cn("text-[10px]", isActive ? "font-semibold" : "font-medium")}>{item.label}</span>
+                </>
+              )}
+            </NavLink>
+          ))}
+        </div>
+      </nav>
+    </>
+  )
+}
