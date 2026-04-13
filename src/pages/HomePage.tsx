@@ -35,7 +35,7 @@ export default function HomePage() {
         <div className="flex items-start justify-between mb-5">
           <div>
             <p className="text-primary-foreground/70 text-sm">{today.getMonth() + 1}月{today.getDate()}日 星期{WEEKDAYS[today.getDay()]}</p>
-            <h1 className="text-2xl md:text-3xl font-bold text-primary-foreground mt-1">{greeting()}，雷老师</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-primary-foreground mt-1">{greeting()}，雷老师。</h1>
           </div>
         </div>
         <div className="flex gap-3">
