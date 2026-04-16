@@ -50,6 +50,8 @@
     --gradient-warm: linear-gradient(135deg, hsl(35, 92%, 60%), hsl(20, 90%, 55%));
     --gradient-success: linear-gradient(135deg, hsl(152, 58%, 48%), hsl(160, 60%, 40%));
     --gradient-sidebar: linear-gradient(180deg, hsl(222, 47%, 11%), hsl(225, 40%, 15%));
+    --gradient-magic: linear-gradient(135deg, hsl(270, 80%, 60%), hsl(230, 80%, 55%));
+    --gradient-gold: linear-gradient(135deg, hsl(45, 90%, 55%), hsl(35, 92%, 60%));
   }
 }
 
@@ -68,6 +70,8 @@
   .gradient-warm { background: var(--gradient-warm); }
   .gradient-success { background: var(--gradient-success); }
   .gradient-sidebar { background: var(--gradient-sidebar); }
+  .gradient-magic { background: var(--gradient-magic); }
+  .gradient-gold { background: var(--gradient-gold); }
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;

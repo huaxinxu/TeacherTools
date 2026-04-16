@@ -1,18 +1,17 @@
 import { NavLink, useNavigate } from "react-router-dom"
-import { Home, CalendarDays, Camera, Grid3X3, Mic, User, GraduationCap, LogOut } from "lucide-react"
+import { Home, BookOpen, Trophy, ShoppingBag, User, Sparkles, LogOut } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/AuthContext"
 
 const navItems = [
-  { to: "/teacher", icon: Home, label: "首页", end: true },
-  { to: "/teacher/calendar", icon: CalendarDays, label: "日历" },
-  { to: "/teacher/score", icon: Camera, label: "计分" },
-  { to: "/teacher/seating", icon: Grid3X3, label: "座位" },
-  { to: "/teacher/decibel", icon: Mic, label: "分贝" },
-  { to: "/teacher/profile", icon: User, label: "我的" },
+  { to: "/student", icon: Home, label: "首页", end: true },
+  { to: "/student/homework", icon: BookOpen, label: "作业" },
+  { to: "/student/rank", icon: Trophy, label: "排行榜" },
+  { to: "/student/shop", icon: ShoppingBag, label: "商城" },
+  { to: "/student/profile", icon: User, label: "我的" },
 ]
 
-export function AppNav() {
+export function StudentNav() {
   const { logout } = useAuth()
   const navigate = useNavigate()
 
@@ -26,10 +25,10 @@ export function AppNav() {
       {/* ── PC Sidebar ── */}
       <aside className="hidden md:flex fixed inset-y-0 left-0 w-60 gradient-sidebar flex-col z-40">
         <div className="flex items-center gap-3 px-5 h-16 border-b border-sidebar-border">
-          <div className="w-8 h-8 rounded-lg gradient-hero flex items-center justify-center">
-            <GraduationCap className="w-5 h-5 text-primary-foreground" />
+          <div className="w-8 h-8 rounded-lg gradient-magic flex items-center justify-center">
+            <Sparkles className="w-5 h-5 text-primary-foreground" />
           </div>
-          <span className="font-bold text-sidebar-foreground">教师助手</span>
+          <span className="font-bold text-sidebar-foreground">学习空间</span>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
           {navItems.map(item => (
@@ -51,14 +50,14 @@ export function AppNav() {
             <LogOut className="w-3.5 h-3.5" />
             <span>退出登录</span>
           </button>
-          <p className="text-xs text-sidebar-foreground/40">教师智能助手 v1.0</p>
+          <p className="text-xs text-sidebar-foreground/40">学习助手 v1.0</p>
         </div>
       </aside>
 
       {/* ── Mobile Bottom Nav ── */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-card/95 backdrop-blur-md border-t shadow-medium safe-bottom">
         <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
-          {navItems.slice(0, 5).map(item => (
+          {navItems.map(item => (
             <NavLink key={item.to} to={item.to} end={item.end}
               className={({ isActive }) => cn(
                 "flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-colors min-w-[48px]",

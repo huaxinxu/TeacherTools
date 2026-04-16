@@ -16,10 +16,10 @@ function greeting(): string {
 }
 
 const tools = [
-  { icon: CalendarDays, label: "日历管理", desc: "课程与日程安排", gradient: "gradient-hero", to: "/calendar" },
-  { icon: Camera, label: "拍照计分", desc: "快速录入成绩", gradient: "gradient-warm", to: "/score" },
-  { icon: Grid3X3, label: "座位编排", desc: "随机打乱座位", gradient: "gradient-hero", to: "/seating" },
-  { icon: Mic, label: "分贝检测", desc: "教室噪音监测", gradient: "gradient-success", to: "/decibel" },
+  { icon: CalendarDays, label: "日历管理", desc: "课程与日程安排", gradient: "gradient-hero", to: "/teacher/calendar" },
+  { icon: Camera, label: "拍照计分", desc: "快速录入成绩", gradient: "gradient-warm", to: "/teacher/score" },
+  { icon: Grid3X3, label: "座位编排", desc: "随机打乱座位", gradient: "gradient-hero", to: "/teacher/seating" },
+  { icon: Mic, label: "分贝检测", desc: "教室噪音监测", gradient: "gradient-success", to: "/teacher/decibel" },
 ]
 
 export default function HomePage() {
@@ -81,7 +81,7 @@ export default function HomePage() {
           <section>
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-base font-semibold">今日日程</h2>
-              <button onClick={() => nav("/calendar")} className="text-xs text-primary font-medium">查看全部</button>
+              <button onClick={() => nav("/teacher/calendar")} className="text-xs text-primary font-medium">查看全部</button>
             </div>
             {todayEvents.length === 0 ? (
               <Card className="border-0"><CardContent className="py-8 text-center">
@@ -105,7 +105,7 @@ export default function HomePage() {
           <section>
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-base font-semibold">最近成绩</h2>
-              <button onClick={() => nav("/score")} className="text-xs text-primary font-medium">查看全部</button>
+              <button onClick={() => nav("/teacher/score")} className="text-xs text-primary font-medium">查看全部</button>
             </div>
             {scores.length === 0 ? (
               <Card className="border-0"><CardContent className="py-8 text-center">

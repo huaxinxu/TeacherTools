@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom"
-import { AppNav } from "./AppNav"
+import { StudentNav } from "./StudentNav"
 import { TopInfoBar } from "./TopInfoBar"
 
-export function Layout() {
+export function StudentLayout() {
   return (
     <div className="min-h-screen bg-background">
-      <AppNav />
+      <StudentNav />
       <main className="pb-20 md:pb-0 md:ml-60">
         <div className="max-w-5xl mx-auto">
-          <TopInfoBar role="teacher" />
+          <TopInfoBar role="student" />
           <Outlet />
         </div>
       </main>

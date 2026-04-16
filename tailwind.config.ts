@@ -94,12 +94,17 @@ const config: Config = {
           "0%": { transform: "scale(1)", opacity: "0.8" },
           "100%": { transform: "scale(1.8)", opacity: "0" },
         },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.4s ease-out",
         "slide-in": "slide-in-right 0.3s ease-out",
         "scale-in": "scale-in 0.2s ease-out",
         "pulse-ring": "pulse-ring 1.5s ease-out infinite",
+        "float": "float 3s ease-in-out infinite",
       },
     },
   },
