@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Modal, Input, Select, useToast } from "@/components/ui/shared"
 import { getEvents, addEvent, deleteEvent, uid, fmtDate, EVENT_TYPES, type CalendarEvent } from "@/lib/store"
 import { cn } from "@/lib/utils"
-
+// 日历页面
 const WK = ["日", "一", "二", "三", "四", "五", "六"]
 const MONTHS = ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
 

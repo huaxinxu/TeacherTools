@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Modal, Input, useToast } from "@/components/ui/shared"
 import { getSeatingLayouts, saveSeatingLayout, deleteSeatingLayout, shuffle, uid, type SeatingLayout } from "@/lib/store"
 import { cn } from "@/lib/utils"
-
+// 座位表页面
 function emptySeats(r: number, c: number): (string | null)[][] {
   return Array.from({ length: r }, () => Array(c).fill(null))
 }
