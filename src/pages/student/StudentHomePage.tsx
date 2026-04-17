@@ -10,6 +10,15 @@ import {
 import { TEACHER_TASKS, SHOP_ITEMS } from "@/lib/studentData"
 import type { StudentTask } from "@/lib/studentStore"
 
+const today = new Date()
+function greeting(): string {
+  const h = today.getHours()
+  if (h < 6) return "夜深了"
+  if (h < 12) return "早上好"
+  if (h < 14) return "中午好"
+  if (h < 18) return "下午好"
+  return "晚上好"
+}
 /* ── Alarm sound via Web Audio API ── */
 function playAlarm() {
   try {
@@ -103,6 +112,11 @@ function PomodoroCard() {
         <text x="60" y="72" textAnchor="middle" className="fill-muted-foreground" fontSize="10">
           {running ? "专注中..." : left === 0 ? "已完成!" : "准备开始"}
         </text>
+        {running && (
+          <text x="60" y="85" textAnchor="middle" className="fill-muted-foreground" fontSize="7">
+            专注中，请勿离开本页面
+          </text>
+        )}
       </svg>
 
       <div className="flex items-center gap-3">
@@ -208,42 +222,108 @@ function TaskCard() {
   )
 }
 
-/* ── Avatar Card ── */
+/* ── Avatar Card — Game-style hero showcase ── */
 function AvatarCard() {
   const equipped = getEquipped()
   const costumeName = equipped.costume ? SHOP_ITEMS.find(i => i.id === equipped.costume)?.name : null
   const accessoryName = equipped.accessory ? SHOP_ITEMS.find(i => i.id === equipped.accessory)?.name : null
   const titleName = equipped.title ? SHOP_ITEMS.find(i => i.id === equipped.title)?.name : null
 
+  /* Floating sparkle particles */
+  const particles = Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    left: `${10 + Math.random() * 80}%`,
+    delay: `${Math.random() * 3}s`,
+    size: 3 + Math.random() * 4,
+  }))
+
   return (
-    <div className="bg-card rounded-2xl shadow-soft p-5 flex flex-col items-center gap-3">
-      <div className="flex items-center gap-2 self-start">
-        <div className="w-8 h-8 rounded-lg gradient-magic flex items-center justify-center">
-          <Sparkles className="w-4 h-4 text-white" />
+    <div className="rounded-2xl shadow-soft overflow-hidden relative">
+      {/* Epic background */}
+      <div className="relative bg-gradient-to-b from-[#1a0a2e] via-[#2d1b69] to-[#1a0a2e] py-5 px-4">
+        {/* Ambient glow behind character */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-amber-400/15 blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[40%] w-32 h-32 rounded-full bg-purple-500/20 blur-2xl pointer-events-none" />
+
+        {/* Floating sparkle particles */}
+        {particles.map(p => (
+          <div key={p.id} className="absolute animate-drift pointer-events-none"
+            style={{ left: p.left, bottom: "20%", animationDelay: p.delay }}>
+            <svg width={p.size} height={p.size} viewBox="0 0 10 10" className="text-amber-300/80">
+              <polygon points="5,0 6,4 10,5 6,6 5,10 4,6 0,5 4,4" fill="currentColor" />
+            </svg>
+          </div>
+        ))}
+
+        {/* Header */}
+        <div className="flex items-center gap-2 mb-3 relative z-10">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.4)]">
+            <Sparkles className="w-3.5 h-3.5 text-white" />
+          </div>
+          <h2 className="font-bold text-sm text-amber-100/90">我的形象</h2>
         </div>
-        <h2 className="font-bold text-base">我的形象</h2>
+
+        {/* Character display */}
+        <div className="relative z-10 flex flex-col items-center">
+          {/* Magic circle behind character */}
+          <div className="absolute top-4 w-36 h-36 rounded-full border border-amber-400/20 animate-[spin_20s_linear_infinite] pointer-events-none">
+            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-amber-400/60" />
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-purple-400/60" />
+            <div className="absolute top-1/2 -left-1 -translate-y-1/2 w-2 h-2 rounded-full bg-amber-400/40" />
+            <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 rounded-full bg-purple-400/40" />
+          </div>
+
+          {/* Character image */}
+          <div className="animate-float relative">
+            <img src="/images/wizard-hero.png" alt="魔法士"
+              className="w-40 h-40 object-contain drop-shadow-[0_8px_24px_rgba(168,85,247,0.4)]"
+              onError={e => { (e.target as HTMLImageElement).style.display = "none"; (e.target as HTMLImageElement).parentElement!.innerHTML = '<span class="text-7xl">🧙‍♂️</span>' }} />
+          </div>
+
+          {/* Title badge - ornate style */}
+          <div className="relative -mt-1 mb-2">
+            {/* Decorative wings */}
+            <div className="absolute top-1/2 -translate-y-1/2 -left-4 w-4 h-[1px] bg-gradient-to-l from-amber-400/80 to-transparent" />
+            <div className="absolute top-1/2 -translate-y-1/2 -right-4 w-4 h-[1px] bg-gradient-to-r from-amber-400/80 to-transparent" />
+            <div className="px-4 py-1 rounded-full text-xs font-bold tracking-wider text-amber-200 border border-amber-400/40 bg-gradient-to-r from-amber-900/40 via-amber-700/30 to-amber-900/40 shadow-[0_0_12px_rgba(245,158,11,0.2)]"
+              style={{ backgroundSize: "200% 100%" }}>
+              {titleName ?? "魔法学徒"}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="w-28 h-28 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center animate-float">
-        <img src="/images/wizard-avatar.png" alt="魔法士" className="w-24 h-24 object-contain"
-          onError={e => { (e.target as HTMLImageElement).style.display = "none"; (e.target as HTMLImageElement).parentElement!.innerHTML = '<span class="text-5xl">🧙‍♂️</span>' }} />
-      </div>
-
-      <div className="inline-block px-3 py-1 rounded-full gradient-magic text-white text-xs font-medium">
-        {titleName ?? "魔法学徒"}
-      </div>
-
-      <div className="grid grid-cols-2 gap-2 w-full">
-        <div className="bg-muted/50 rounded-xl p-2.5 text-center">
-          <p className="text-[10px] text-muted-foreground">装扮</p>
-          <p className="text-xs font-medium mt-0.5">{costumeName ?? "默认法袍"}</p>
+      {/* Equipment panel — below the scene */}
+      <div className="bg-card p-4 space-y-3">
+        {/* Equipment slots */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="relative group flex items-center gap-2.5 p-2.5 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100/50 dark:from-purple-950/30 dark:to-purple-900/20 border border-purple-200/50 dark:border-purple-700/30 transition-all hover:shadow-md">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-sm flex-shrink-0">
+              <span className="text-sm">👘</span>
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] text-muted-foreground leading-tight">装扮</p>
+              <p className="text-xs font-semibold truncate">{costumeName ?? "默认法袍"}</p>
+            </div>
+          </div>
+          <div className="relative group flex items-center gap-2.5 p-2.5 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/30 dark:to-blue-900/20 border border-blue-200/50 dark:border-blue-700/30 transition-all hover:shadow-md">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-sm flex-shrink-0">
+              <span className="text-sm">💎</span>
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] text-muted-foreground leading-tight">饰品</p>
+              <p className="text-xs font-semibold truncate">{accessoryName ?? "无"}</p>
+            </div>
+          </div>
         </div>
-        <div className="bg-muted/50 rounded-xl p-2.5 text-center">
-          <p className="text-[10px] text-muted-foreground">饰品</p>
-          <p className="text-xs font-medium mt-0.5">{accessoryName ?? "无"}</p>
-        </div>
+
+        {/* CTA */}
+        <a href="/student/shop"
+          className="flex items-center justify-center gap-1.5 w-full py-2 rounded-xl text-xs font-semibold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 border border-amber-200/50 dark:border-amber-700/30 hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors">
+          <Sparkles className="w-3.5 h-3.5" />
+          前往积分商城解锁更多装扮
+        </a>
       </div>
-      <p className="text-xs text-muted-foreground">前往积分商城解锁更多装扮</p>
     </div>
   )
 }
@@ -304,8 +384,8 @@ export default function StudentHomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-purple-500/40" />
         <div className="absolute inset-0 flex items-center px-5 md:px-8">
           <div>
-            <h1 className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">我的书房</h1>
-            <p className="text-white/80 text-sm mt-1 drop-shadow-md">今天也要加油学习哦！</p>
+            <h1 className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">欢迎回来</h1>
+            <p className="text-white/80 text-sm mt-1 drop-shadow-md">{greeting()}</p>
           </div>
         </div>
       </div>

@@ -5,10 +5,12 @@ import { useAuth } from "@/contexts/AuthContext"
 
 const navItems = [
   { to: "/student", icon: Home, label: "首页", end: true },
-  { to: "/student/homework", icon: BookOpen, label: "作业" },
+  { to: "/student/homework", icon: BookOpen, label: "任务" },
+  { to: "/student/pvp", icon: User, label: "世界探索" },
   { to: "/student/rank", icon: Trophy, label: "排行榜" },
   { to: "/student/shop", icon: ShoppingBag, label: "商城" },
-  { to: "/student/profile", icon: User, label: "我的" },
+  { to: "/student/profile", icon: User, label: "个人资料" },
+ 
 ]
 
 export function StudentNav() {

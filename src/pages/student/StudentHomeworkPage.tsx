@@ -56,9 +56,9 @@ export default function StudentHomeworkPage() {
       <header className="gradient-hero px-5 pt-10 pb-5 md:pt-8 md:rounded-b-2xl">
         <div className="flex items-center gap-2 mb-1">
           <BookOpen className="w-5 h-5 text-white/80" />
-          <h1 className="text-xl font-bold text-white">作业列表</h1>
+          <h1 className="text-xl font-bold text-white">任务列表</h1>
         </div>
-        <p className="text-white/70 text-sm">共 {HOMEWORK_LIST.length} 项作业</p>
+        <p className="text-white/70 text-sm">共 {HOMEWORK_LIST.length} 项任务</p>
       </header>
 
       <div className="px-4 md:px-6 -mt-4 space-y-4 pb-4">

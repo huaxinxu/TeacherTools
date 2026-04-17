@@ -2,7 +2,7 @@ import { Gamepad2 } from "lucide-react"
 import { useLocation } from "react-router-dom"
 
 const TITLES: Record<string, string> = {
-  "/student/game": "游戏模块",
+  "/student/game": "训练模块",
   "/student/pvp": "匹配对战",
 }
 
