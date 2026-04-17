@@ -30,7 +30,7 @@ export function StudentNav() {
           <div className="w-8 h-8 rounded-lg gradient-magic flex items-center justify-center">
             <Sparkles className="w-5 h-5 text-primary-foreground" />
           </div>
-          <span className="font-bold text-sidebar-foreground">The Learning Space</span>
+          <span className="font-bold text-sidebar-foreground">My Class Realm</span>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
           {navItems.map(item => (
