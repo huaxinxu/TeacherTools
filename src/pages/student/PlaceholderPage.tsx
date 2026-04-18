@@ -1,19 +1,10 @@
 import { Gamepad2 } from "lucide-react"
-import { useLocation } from "react-router-dom"
-
-const TITLES: Record<string, string> = {
-  "/student/game": "训练模块",
-  "/student/pvp": "匹配对战",
-}
 
 export default function PlaceholderPage() {
-  const { pathname } = useLocation()
-  const title = TITLES[pathname] ?? "功能开发中"
-
   return (
     <div className="animate-fade-in">
       <header className="gradient-magic px-5 pt-10 pb-5 md:pt-8 md:rounded-b-2xl">
-        <h1 className="text-xl font-bold text-white">{title}</h1>
+        <h1 className="text-xl font-bold text-white">功能开发中</h1>
       </header>
       <div className="px-4 md:px-6 -mt-4">
         <div className="bg-card rounded-2xl shadow-medium p-8 text-center">

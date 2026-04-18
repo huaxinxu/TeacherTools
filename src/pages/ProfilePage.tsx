@@ -1,14 +1,16 @@
 import { useMemo, useState } from "react"
-import { CalendarDays, Camera, Grid3X3, Mic, Trash2, Download, Upload, AlertTriangle } from "lucide-react"
+import { CalendarDays, Camera, Grid3X3, Mic, Trash2, Download, Upload, AlertTriangle, GraduationCap } from "lucide-react"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Modal } from "@/components/ui/shared"
 import { useToast } from "@/components/ui/shared"
 import { getEvents, getScores, getSeatingLayouts } from "@/lib/store"
+import { getStudentGrade, setStudentGrade } from "@/lib/exploreStore"
 
 export default function ProfilePage() {
   const { toast } = useToast()
   const [confirmClear, setConfirmClear] = useState(false)
+  const [currentGrade, setCurrentGrade] = useState<1 | 2 | 3>(getStudentGrade)
 
   const stats = useMemo(() => ({
     events: getEvents().length,
@@ -133,6 +135,36 @@ export default function ProfilePage() {
               <p className="text-xs opacity-75 leading-relaxed">
                 专为教师设计的多功能工具集，涵盖日历管理、试卷计分、座位编排、课堂分贝监测等实用功能。
               </p>
+            </CardContent>
+          </Card>
+
+          {/* Grade Setting */}
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-primary" />
+                学生年级设置
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pb-4">
+              <p className="text-xs text-muted-foreground mb-3">设置学生可以访问的冒险关卡年级</p>
+              <div className="flex gap-2">
+                {([1, 2, 3] as const).map(g => (
+                  <button key={g}
+                    onClick={() => {
+                      setStudentGrade(g)
+                      setCurrentGrade(g)
+                      toast(`已设置为${["", "一", "二", "三"][g]}年级`, "success")
+                    }}
+                    className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-all ${
+                      currentGrade === g
+                        ? "gradient-hero text-white shadow-glow"
+                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    }`}>
+                    {["", "一", "二", "三"][g]}年级
+                  </button>
+                ))}
+              </div>
             </CardContent>
           </Card>
 
