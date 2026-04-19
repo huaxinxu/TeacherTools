@@ -6,6 +6,7 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext"
 import { ToastProvider } from "@/components/ui/shared"
 import { lazy, Suspense } from "react"
 
+// 根路由组件、路由表配置、页面路由嵌套、全局页面入口
 /* ── Teacher Pages ── */
 const HomePage = lazy(() => import("@/pages/HomePage"))
 const CalendarPage = lazy(() => import("@/pages/CalendarPage"))
@@ -30,6 +31,7 @@ const PvpMatchPage = lazy(() => import("@/pages/student/PvpMatchPage"))
 /* ── Auth Pages ── */
 const LoginPage = lazy(() => import("@/pages/LoginPage"))
 
+
 function PageLoader() {
   return (
     <div className="flex items-center justify-center min-h-[50vh]">
@@ -53,6 +55,7 @@ export default function App() {
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={<RootRedirect />} />
+        
 
               {/* Teacher Routes */}
               <Route path="/teacher" element={<RequireAuth role="teacher"><Layout /></RequireAuth>}>

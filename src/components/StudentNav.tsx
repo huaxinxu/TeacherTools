@@ -3,6 +3,7 @@ import { Home, BookOpen, ShoppingBag, User, Sparkles, LogOut, Compass } from "lu
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/AuthContext"
 
+
 const navItems = [
   { to: "/student", icon: Home, label: "我的中台", end: true },
   { to: "/student/homework", icon: BookOpen, label: "任务中心" },
@@ -45,12 +46,13 @@ export function StudentNav() {
           ))}
         </nav>
         <div className="px-5 py-4 border-t border-sidebar-border">
+           <p className="text-xs text-sidebar-foreground/40">我的班级世界 1.0</p>
           <button onClick={handleLogout}
             className="flex items-center gap-2 text-xs text-sidebar-foreground/40 hover:text-sidebar-foreground/70 transition-colors w-full mb-2">
             <LogOut className="w-3.5 h-3.5" />
             <span>退出登录</span>
           </button>
-          <p className="text-xs text-sidebar-foreground/40">学习助手 v1.0</p>
+         
         </div>
       </aside>
 
