@@ -275,7 +275,7 @@ function AvatarCard() {
 
           {/* Character image */}
           <div className="animate-float relative">
-            <img src="/images/wizard-hero.png" alt="魔法士"
+            <img src="/images/wizard-avatar.png" alt="魔法士"
               className="w-40 h-40 object-contain drop-shadow-[0_8px_24px_rgba(168,85,247,0.4)]"
               onError={e => { (e.target as HTMLImageElement).style.display = "none"; (e.target as HTMLImageElement).parentElement!.innerHTML = '<span class="text-7xl">🧙‍♂️</span>' }} />
           </div>

@@ -22,6 +22,7 @@ const StudentShopPage = lazy(() => import("@/pages/student/StudentShopPage"))
 const StudentProfilePage = lazy(() => import("@/pages/student/StudentProfilePage"))
 const PlaceholderPage = lazy(() => import("@/pages/student/PlaceholderPage"))
 const ExploreHubPage = lazy(() => import("@/pages/student/ExploreHubPage"))
+const AdventureSelectPage = lazy(() => import("@/pages/student/AdventureSelectPage"))
 const AdventureLevelMapPage = lazy(() => import("@/pages/student/AdventureLevelMapPage"))
 const AdventurePlayPage = lazy(() => import("@/pages/student/AdventurePlayPage"))
 const PvpMatchPage = lazy(() => import("@/pages/student/PvpMatchPage"))
@@ -72,6 +73,7 @@ export default function App() {
                 <Route path="profile" element={<StudentProfilePage />} />
                 <Route path="game" element={<PlaceholderPage />} />
                 <Route path="explore" element={<ExploreHubPage />} />
+                <Route path="explore/adventure" element={<AdventureSelectPage />} />
                 <Route path="explore/adventure/:subject" element={<AdventureLevelMapPage />} />
                 <Route path="explore/adventure/:subject/:levelId" element={<AdventurePlayPage />} />
                 <Route path="explore/pvp" element={<PvpMatchPage />} />

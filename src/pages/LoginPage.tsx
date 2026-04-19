@@ -36,7 +36,7 @@ export default function LoginPage() {
           <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-4">
             <GraduationCap className="w-9 h-9 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-white">教师助手</h1>
+          <h1 className="text-2xl font-bold text-white">我的班级世界</h1>
           <p className="text-white/70 text-sm mt-1">请登录您的账号</p>
         </div>
 

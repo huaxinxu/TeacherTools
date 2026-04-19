@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Modal, Input, useToast } from "@/components/ui/shared"
 import { addScore, getScores, deleteScore, uid, fmtDate, type ScoreRecord } from "@/lib/store"
 import { cn } from "@/lib/utils"
-
+//拍照识别功能
 function stats(s: number[]) {
   if (!s.length) return { avg: 0, max: 0, min: 0, cnt: 0 }
   const avg = s.reduce((a, b) => a + b, 0) / s.length
