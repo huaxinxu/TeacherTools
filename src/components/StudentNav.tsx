@@ -2,7 +2,8 @@ import { NavLink, useNavigate } from "react-router-dom"
 import { Home, BookOpen, ShoppingBag, User, Sparkles, LogOut, Compass } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/AuthContext"
-
+import { useState } from "react";
+import { ChangelogModal } from "@/components/ui/ChangelogModal";
 
 const navItems = [
   { to: "/student", icon: Home, label: "我的中台", end: true },
@@ -15,6 +16,7 @@ const navItems = [
 export function StudentNav() {
   const { logout } = useAuth()
   const navigate = useNavigate()
+  const [changelogOpen, setChangelogOpen] = useState(false);
 
   const handleLogout = () => {
     logout()
@@ -47,6 +49,11 @@ export function StudentNav() {
         </nav>
         <div className="px-5 py-4 border-t border-sidebar-border">
            <p className="text-xs text-sidebar-foreground/40">我的班级世界 1.0</p>
+           <button className="flex items-center gap-2 text-xs text-sidebar-foreground/40 hover:text-sidebar-foreground/70 hover:bg-sidebar-accent rounded transition-colors w-full mb-2 nav-item" onClick={() => setChangelogOpen(true)}>版本更新日志</button>
+           <ChangelogModal 
+        open={changelogOpen} 
+        onClose={() => setChangelogOpen(false)} 
+      />
           <button onClick={handleLogout}
             className="flex items-center gap-2 text-xs text-sidebar-foreground/40 hover:text-sidebar-foreground/70 transition-colors w-full mb-2">
             <LogOut className="w-3.5 h-3.5" />
